@@ -37,7 +37,7 @@ const upDone=()=>{
   return (
     <li data-testid="task" className={styles.task}>
      <input  onChange={()=>upDone()} type="checkbox" data-testid="task-checkbox" defaultChecked={task.done}/> 
-      {task.done===true ? <div style={{textDecoration:"line-through",textAlign:"center",width:"80px"}} data-testid="task-text">{task.text}</div> :<div style={{textAlign:"center",width:"80px"}} data-testid="task-text">{task.text}</div>}
+      <div  data-testid="task-text">{task.text}</div> 
       {/* Counter here */<Counter task={task} tasks={tasks} update={update}/>}
       <button onClick={()=>changetasks()} data-testid="task-remove-button">X</button>
     </li>
