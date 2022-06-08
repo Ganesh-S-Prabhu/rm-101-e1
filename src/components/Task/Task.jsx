@@ -2,39 +2,44 @@ import React from "react";
 import styles from "./task.module.css";
 import Counter from "../Counter/Counter";
 
-const Task = ({ e, counter, check, deleteTask }) => {
+const Task = ({task,tasks,update}) => {
   // NOTE: do not delete `data-testid` key value pair
+  const changetasks=()=>{
+ 
+    for(var i=0;i<tasks.length;i++){
+      if(tasks[i].id===task.id){
+       let ans= [...tasks]
+          ans.splice(i,1)
+        
+        return  update(ans)
+         
+          
 
+      }
+    }
+}
+
+const upDone=()=>{
+ let ans=[...tasks]
+ for(var i=0;i<ans.length;i++){
+   if(ans[i].id===task.id){
+        ans[i].done=!ans[i].done
+         
+     
+     return  update(ans)
+      
+       
+
+   }
+ }
+
+}
   return (
     <li data-testid="task" className={styles.task}>
-      <input type="checkbox" data-testid="task-checkbox" defaultChecked={e.done}   onClick={() => {
-          check(e.id);
-        }}/>
-      <div data-testid="task-text">{e.text}</div>
-      {/* Counter here */}
-      {/* <span></span> */}
-      
-      <Counter count={e.count} counter={counter} id={e.id}/>
-      <button data-testid="task-remove-button"  onClick={() => {
-          deleteTask(e.id);
-        }}><svg
-    height="21"
-    viewBox="0 0 21 21"
-    width="21"
-    xmlns="http://www.w3.org/2000/svg"
-    >
-    <g
-        fill="none"
-        fill-rule="evenodd"
-        stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        transform="translate(5 5)"
-    >
-        <path d="m10.5 10.5-10-10z" />
-        <path d="m10.5.5-10 10" />
-    </g>
-</svg></button>
+     <input  onChange={()=>upDone()} type="checkbox" data-testid="task-checkbox" defaultChecked={task.done}/> 
+      {task.done===true ? <div style={{textDecoration:"line-through",textAlign:"center",width:"80px"}} data-testid="task-text">{task.text}</div> :<div style={{textAlign:"center",width:"80px"}} data-testid="task-text">{task.text}</div>}
+      {/* Counter here */<Counter task={task} tasks={tasks} update={update}/>}
+      <button onClick={()=>changetasks()} data-testid="task-remove-button">X</button>
     </li>
   );
 };

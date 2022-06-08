@@ -3,28 +3,20 @@ import styles from "./taskHeader.module.css";
 // import tasks from "../../data/tasks.json";
 const TaskHeader = ({ tasks }) => {
   // sample values to be replaced
-  let count=0
-  function getlength(){
-     
-    for(let i=0;i<tasks.length;i++){
-      if(!tasks[i].done){
-        count++
-      }
-    }
-  }
-  getlength();
   let totalTask = tasks.length;
-  let unCompletedTask = count;
-
-
+  let uc=tasks.filter((ele)=>{
+    return ele.done!==true
+  })
+  let unCompletedTask = uc.length;
+   
   
 
   // NOTE: do not delete `data-testid` key value pair
   return (
     <div data-testid="task-header" className={styles.taskHeader}>
-      
-      You have  <b data-testid="header-remaining-task">{unCompletedTask}</b> 
-        of <b data-testid="header-total-task">{totalTask}</b>  tasks remaining
+           <h2>Todo List</h2>  
+      <b data-testid="header-remaining-task">You have {unCompletedTask} of </b>
+      <b data-testid="header-total-task">{totalTask} tasks remaining</b>
     </div>
   );
 };

@@ -1,24 +1,26 @@
 import React, { useState } from "react";
 import styles from "./addTask.module.css";
 import tasks from "../../data/tasks.json";
-const AddTask = ({addNewTask}) => {
+const AddTask = ({modify,tasks}) => {
   // NOTE: do not delete `data-testid` key value pair
-  const [task,settask]=useState("")
+ 
+  const [text,setText]=useState({
+    id:tasks.length,
+    text:"",
+    done:false, 
+    count: 1
+  })
 function addtask(){
-if(task!=""){
-  let todo={
-    id:tasks.length+1,
-    text:task,
-    done:false,
-    count:1,
-  }
- addNewTask(todo)
+modify(...tasks,text)
  
 }
-}
+
 
 const handleinput=(e)=>{
-  settask(e.target.value)
+  setText( setText({
+    ...text,
+    text:e.target.value,
+  }))
 }
 
   return (
@@ -27,6 +29,6 @@ const handleinput=(e)=>{
       <button data-testid="add-task-button" onClick={addtask}>+</button>
     </div>
   );
-};
+  }
 
 export default AddTask;
