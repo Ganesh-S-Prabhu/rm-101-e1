@@ -1,0 +1,10 @@
+.task {
+  /* Sample  */
+  /* border: 1px solid red; */
+  display: flex;
+}
+.task div{
+  
+  width: 100px;
+  
+}
